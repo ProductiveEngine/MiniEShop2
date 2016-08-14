@@ -1,0 +1,69 @@
+<h1>Product types</h1>
+<div ng-app="eshopApp">
+    <div ng-controller="EditProductTypeController">
+        <table class="table table-condensed table-hover " ng-hide="loading">
+            <tr class="panel-title">
+                <!--Buttons column-->
+                <th style="width: 100px;">
+                    <!--Add + Cancel-->
+                    <div class="btn-toolbar"><i class="btn glyphicon glyphicon-plus" ng-click="toggleAddMode()" title="Add" ng-hide="addMode"></i></div>
+                    <div class="btn-toolbar"><i class="btn glyphicon glyphicon-minus" ng-click="toggleAddMode()" title="Cancel" ng-show="addMode"></i></div>
+                </th>
+                <th style="vertical-align: middle">Name</th>
+                <th style="vertical-align: middle">Created Date</th>
+            </tr>
+            <tr ng-show="addMode" style="background: rgb(251, 244, 222)">
+                <td>
+                    <div class="btn-toolbar">
+                        <div class="btn-group">
+                            <i class="btn glyphicon glyphicon-floppy-disk" ng-click="saveProductType()" title="Create" ng-disabled="addForm.$invalid"></i>
+                            <i class="btn glyphicon glyphicon-remove" ng-click="toggleAddMode()" title="Cancel"></i>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <form name="addForm">
+                        <input type="text" ng-model="newItem.Name" class="form-control" minlength="1" required placeholder="Product type..." ng-keydown="saveOnEnter(pType, $event)"/>
+                    </form>
+                </td>
+                <td>
+                    <form>
+                        <input type="date" disabled ng-model="newItem.CreatedDate" class="form-control"/>
+                    </form>
+                </td>
+            </tr>
+            <!--Content-->
+            <tr ng-repeat="pType in allProductTypes">
+                <!--Buttons column-->
+                <td>
+                    <!--Edit + Delete-->
+                    <div class="btn-toolbar" ng-show="pType.EditMode == null || pType.EditMode == false">
+                        <div class="btn-group">
+                            <i class="btn glyphicon glyphicon-edit" ng-click="toggleEditMode(pType)" title="Edit"></i>
+                            <i class="btn glyphicon glyphicon-trash" ng-click="deleteProductType(pType)" title="Delete" data-toggle="modal"></i>
+                        </div>
+                    </div>
+                    <div class="btn-toolbar" ng-show="pType.EditMode">
+                        <div class="btn-group">
+                            <i class="btn glyphicon glyphicon-floppy-disk" ng-click="updateProductType(editForm,pType)" title="Save" ng-disabled="editForm.$invalid"></i>
+                            <i class="btn glyphicon glyphicon-remove" ng-click="toggleEditMode(pType)" title="Cancel"></i>
+                        </div>
+                    </div>
+                </td>
+                <td style="vertical-align: middle">
+                        <span ng-show="pType.EditMode == null || pType.EditMode == false" ng-dblclick="toggleEditMode(pType)">
+                            {{pType.Name}}
+                        </span>
+                    <form name="editForm">
+                        <input ng-model="pType.Name" ng-show="pType.EditMode" minlength="1" required ng-keydown="updateOnEnter(pType, $event)" class="form-control"/>
+                    </form>
+                </td>
+                <td style="vertical-align: middle">
+                        <span ng-show="pType.EditMode == null || pType.EditMode == false" ng-dblclick="toggleEditMode(pType)">
+                            {{pType.CreatedDate}}                                                        
+                        </span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

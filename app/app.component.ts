@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 @Component({
     selector: 'my-app',
-    template: `
-      <h1>{{title}}</h1>      
-    `,
+    templateUrl: 'app/app.component.html'
 })
 export class AppComponent {
-    title = 'Mini e-Shop 2';
+    title = 'Mini EShop 2';
 }
