@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ProductType } from '../domain-classes/product-type';
 import { ProductTypeService } from '../services/product-type.service';
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'product-types',
@@ -12,6 +13,18 @@ export class ProductTypesComponent {
     newItem: ProductType;
     addMode: boolean = false;
     allProductTypes:ProductType[];
+
+    constructor(
+        private router: Router,
+        private productTypeService: ProductTypeService) {
+
+    }
+    getProductTypes() {
+        this.productTypeService.getProductTypes().then(productTypes => this.allProductTypes = productTypes);
+    }
+    ngOnInit() {
+        this.getProductTypes();
+    }
     //-----------------------------------------------
     requestSuccess () {
         //notificationFactory.success();
@@ -23,48 +36,50 @@ export class ProductTypesComponent {
 
     toggleAddMode () {
         this.addMode = !this.addMode;
-        this.newItem.name = '';
+        this.newItem = new ProductType();
     };
 
     toggleEditMode (productType: ProductType) {
 
-    if (this.allProductTypes != undefined) {
-        productType.editMode = !productType.editMode;
+        if (this.allProductTypes != undefined) {
+            productType.editMode = !productType.editMode;
 
-        if (!productType.editMode) {
-            productType.name = productType.serverName;
-        } else {
-            productType.serverName = productType.name;
+            if (!productType.editMode) {
+                productType.name = productType.serverName;
+            } else {
+                productType.serverName = productType.name;
 
-            this.allProductTypes.forEach(function (entry) {
-                if (productType.productTypeId != entry.productTypeId && entry.editMode) {
-                    entry.name = entry.serverName;
-                    entry.editMode = false;
-                }
-            });
+                this.allProductTypes.forEach(function (entry) {
+                    if (productType.productTypeId != entry.productTypeId && entry.editMode) {
+                        entry.name = entry.serverName;
+                        entry.editMode = false;
+                    }
+                });
+            }
         }
-    }
-};
+    };
+    saveProductType() {
+        //if ($scope.addForm.$valid) {
 
+        this.newItem.createdDate = new Date();
+
+        /*
+            ProductTypeData.save($scope.newItem)
+                .$promise
+                .then(function (response) {
+                    $scope.allProductTypes.unshift(response);
+                    $scope.toggleAddMode();
+                    requestSuccess();
+                })
+                .catch(function (response) { console.log('failure', response) });
+                */
+//        }
+    };
 
 
 }
         /*
-        $scope.saveProductType = function () {
-            if ($scope.addForm.$valid) {
 
-                $scope.newItem.CreatedDate = new Date();
-
-                ProductTypeData.save($scope.newItem)
-                    .$promise
-                    .then(function (response) {
-                        $scope.allProductTypes.unshift(response);
-                        $scope.toggleAddMode();
-                        requestSuccess();
-                    })
-                    .catch(function (response) { console.log('failure', response) });
-            }
-        };
 
         $scope.deleteProductType = function (productType) {
             productType.$delete(function () {

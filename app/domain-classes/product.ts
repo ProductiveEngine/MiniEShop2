@@ -5,6 +5,6 @@ export class Product {
     description: string;
     stock: number;
     price: number;
-    createdDate: string;
-    modifiedDate: string;
+    createdDate: Date;
+    modifiedDate: Date;
 }
