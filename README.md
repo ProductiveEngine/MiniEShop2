@@ -14,7 +14,7 @@ This is a simple web application showcasing the use of Angular JS 2.
 * Bootstrap v3.3.7
 
 #IDE
-JetBrains WebstStorm
+JetBrains WebStorm
 
 #Important files in MiniEShop 2 project
 
