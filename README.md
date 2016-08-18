@@ -15,20 +15,27 @@ app
 >domain-classes
 >home
 >product-types
+
 >>product-types.component.html
 >>product-types.component.ts
+
 >products
+
 >>product-edit.component.html
 >>product-edit.component.ts
 >>products.component.html
 >>products.component.ts
+
 >services
+
 >>product.service.ts
 >>product-type.service.ts
+
 >app.component.ts
 >app.module.ts
 >app.routing.ts
 >main.ts
+
 index.html
 
 #Getting started
