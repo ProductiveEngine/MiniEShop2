@@ -8,7 +8,7 @@ JetBrains WebstStorm
 * Google AngularJS v2
 * Bootstrap v3.3.7
 
-<h3>Important files in MiniEShop 2 project</h3>
+#Important files in MiniEShop 2 project
 
 app
 >about
