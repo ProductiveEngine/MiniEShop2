@@ -12,8 +12,11 @@ JetBrains WebstStorm
 
 app
 >about
+
 >domain-classes
+
 >home
+
 >product-types
 
 >>product-types.component.html
